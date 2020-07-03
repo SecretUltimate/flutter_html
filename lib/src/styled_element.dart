@@ -4,6 +4,8 @@ import 'package:html/dom.dart' as dom;
 //TODO(Sub6Resources): don't use the internal code of the html package as it may change unexpectedly.
 import 'package:html/src/query_selector.dart';
 
+import 'css_parser.dart';
+
 /// A [StyledElement] applies a style to all of its children.
 class StyledElement {
   final String name;
@@ -172,6 +174,11 @@ StyledElement parseStyledElement(
       styledElement.style = Style(
         margin: EdgeInsets.symmetric(vertical: 14.0, horizontal: 40.0),
         display: Display.BLOCK,
+      );
+      break;
+    case "font":
+      styledElement.style = Style(
+        color: ExpressionMapping.stringToColor(element.attributes['color'] ?? '#000000'),
       );
       break;
     case "footer":
